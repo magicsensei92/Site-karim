@@ -1,0 +1,41 @@
+---
+title: "Vidéos"
+layout: page.njk
+permalink: /videos/
+chapo: "Les passages télé de Karim, notamment dans La Maison des Maternelles, et ses vidéos, classés par activité."
+---
+{%- set nb = collections.videos | length %}
+<ul class="filtres" aria-label="Filtrer par activité">
+  <li><button type="button" data-filtre="toutes" aria-pressed="true">Toutes ({{ nb }})</button></li>
+  {%- for a in activites %}
+    {%- set n = collections.videos | videosDe(a.slug) | length %}
+    {%- if n > 0 %}<li><button type="button" data-filtre="{{ a.slug }}" aria-pressed="false">{{ a.nom }} ({{ n }})</button></li>{% endif %}
+  {%- endfor %}
+  {%- set autres = 0 %}
+</ul>
+
+<ul class="videos">
+{%- for v in collections.videos %}
+  {%- set a = activites | activite(v.data.activite) %}
+  {%- set id = v.data.url | youtubeId %}
+  <li class="video" data-activite="{{ v.data.activite or 'autre' }}" style="--v-accent: {{ a.encre if a else '#1F2328' }}">
+    {%- if v.data.integrer and id %}
+    <a class="vignette" href="{{ v.data.url }}" data-integrer="{{ id }}" aria-label="Lire : {{ v.data.title }}">
+    {%- else %}
+    <a class="vignette" href="{{ v.data.url }}" target="_blank" rel="noopener" aria-label="Regarder sur YouTube : {{ v.data.title }}">
+    {%- endif %}
+      <span class="lecture" aria-hidden="true"></span>
+      {%- if v.data.source %}<span class="source">{{ v.data.source }}</span>{% endif %}
+    </a>
+    <div class="infos">
+      <h3>{{ v.data.title }}</h3>
+      <p class="meta">{% if a %}{{ a.nom }}{% endif %}{% if v.data.date_video %} · {{ v.data.date_video }}{% endif %}{% if not v.data.integrer %} · s'ouvre sur YouTube{% endif %}</p>
+      {%- if v.data.description %}<p class="desc">{{ v.data.description }}</p>{% endif %}
+    </div>
+  </li>
+{%- endfor %}
+</ul>
+
+<div class="encadre">
+Les extraits d'émissions de France Télévisions s'ouvrent sur YouTube : ils ne sont pas intégrés au site sans l'accord de la chaîne. Les vidéos de Karim peuvent être lues directement ici ; YouTube ne se charge qu'au clic.
+</div>

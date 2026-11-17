@@ -1,0 +1,94 @@
+{%- set act = activites | activite(activite) if activite else null -%}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title and page.url != "/" %}{{ title }} · {% endif %}{{ site.nom }}</title>
+  <meta name="description" content="{{ description or (act.resume if act) or site.presentation }}">
+  {%- if brouillon or not site.url %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif %}
+  <link rel="icon" href="/assets/img/icone-k.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/icone-k.png">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body class="{% if act %}theme-activite activite-{{ act.slug }}{% else %}theme-hub{% endif %}"
+  {%- if act %} style="--accent: {{ act.accent }}; --encre: {{ act.encre }}; --doux: {{ act.doux }}; --deco: {{ act.deco }}; --police-titre: '{{ act.police }}';"{% endif %}>
+  <a class="aller-au-contenu" href="#contenu">Aller au contenu</a>
+
+  {%- if act and act.slug == "sortez-vos-griffes" %}
+  {% include "svg-securite.njk" %}
+  {%- endif %}
+
+  <header class="entete">
+    <div class="entete-int">
+      <a class="marque" href="/"><img src="/assets/img/logo-karim-ngosso.png" alt="{{ site.nom }}, accueil" width="176" height="44"></a>
+      <button class="menu-bouton" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+      <nav id="menu-principal" class="menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="/#activites" >Activités</a></li>
+          <li><a href="/videos/" {% if page.url == "/videos/" %}aria-current="page"{% endif %}>Vidéos</a></li>
+          <li><a href="/premium/" {% if page.url == "/premium/" %}aria-current="page"{% endif %}>Espace premium</a></li>
+          <li><a href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  {%- if act %}
+  {%- set sousPages = collections.pagesActivites | pagesDe(act.slug) %}
+  <div class="bandeau-activite">
+    <div class="bandeau-int">
+      <a class="bandeau-nom" href="/activites/{{ act.slug }}/">{% if act.icone %}<img class="bandeau-icone" src="{{ act.icone }}" alt="" width="36" height="36">{% endif %}{{ act.nom }}</a>
+      {%- if sousPages.length > 1 %}
+      <nav class="sous-menu" aria-label="Pages de {{ act.nom }}">
+        <ul>
+        {%- for p in sousPages %}
+          <li><a href="{{ p.url }}" {% if p.url == page.url %}aria-current="page"{% endif %}>{{ p.data.titre_menu or p.data.title }}</a></li>
+        {%- endfor %}
+        </ul>
+      </nav>
+      {%- endif %}
+    </div>
+  </div>
+  {%- endif %}
+
+  <main id="contenu">
+    {%- if brouillon %}
+    <div class="avertissement-brouillon" role="note">
+      <strong>Brouillon, non publié.</strong> Cette page n'apparaît que dans l'aperçu. Elle contient des points encore à vérifier{% if relecture_juridique %} et doit passer en relecture juridique{% endif %} avant d'être mise en ligne.
+    </div>
+    {%- endif %}
+    {{ content | safe }}
+  </main>
+
+  <footer class="pied">
+    <div class="pied-int">
+      <div>
+        <p class="pied-nom"><img src="/assets/img/logo-karim-ngosso-blanc.png" alt="{{ site.nom }}" width="176" height="44"></p>
+        <p>{{ site.presentation }}</p>
+      </div>
+      <nav aria-label="Toutes les activités">
+        <p class="pied-titre">Activités</p>
+        <ul>
+        {%- for a in activites %}
+          <li><a href="/activites/{{ a.slug }}/">{{ a.nom }}</a>{% if a.statut == "a-venir" %} <span class="etiquette-petite">à venir</span>{% endif %}</li>
+        {%- endfor %}
+        </ul>
+      </nav>
+      <nav aria-label="Pages pratiques">
+        <p class="pied-titre">Pratique</p>
+        <ul>
+          <li><a href="/videos/">Vidéos</a></li>
+          <li><a href="/premium/">Espace premium</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/mentions-legales/">Mentions légales et confidentialité</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="pied-note">Ce site ne dépose aucun traceur publicitaire et ne mesure pas votre navigation. Les programmes présentés ne remplacent pas un avis médical.</p>
+  </footer>
+  <script src="/assets/js/site.js" defer></script>
+</body>
+</html>

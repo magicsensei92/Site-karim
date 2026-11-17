@@ -1,0 +1,203 @@
+# Réglages de l'éditeur en ligne Pages CMS (https://app.pagescms.org).
+# Karim n'a pas besoin de modifier ce fichier.
+media:
+  input: src/assets/img
+  output: /assets/img
+
+content:
+  - name: videos
+    label: "Vidéos"
+    type: collection
+    path: src/videos
+    exclude: [videos.11tydata.json]
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view: { primary: title, fields: [title, activite], sort: [title] }
+    fields:
+      - { name: title, label: "Titre de la vidéo", type: string, required: true }
+      - { name: url, label: "Lien YouTube (copier-coller l'adresse)", type: string, required: true }
+      - name: activite
+        label: "Activité"
+        type: select
+        options:
+          values:
+            - { name: la-petite-chevalerie, label: "La Petite Chevalerie" }
+            - { name: sortez-vos-griffes, label: "Sortez vos griffes" }
+            - { name: matria, label: "Matria par Karim (9 mois en forme, Maman en forme)" }
+            - { name: respirer-se-tenir-se-poser, label: "Respirer, se tenir, se poser" }
+            - { name: perinee-flow, label: "Périnée Flow" }
+            - { name: prevention-chutes-ehpad, label: "Prévention des chutes en EHPAD" }
+            - { name: contes-sportifs, label: "Les contes sportifs" }
+            - { name: fitness, label: "Fitness" }
+            - { name: developpement-personnel, label: "Développement personnel" }
+      - { name: source, label: "Émission ou chaîne (ex. La Maison des Maternelles (France Télévisions))", type: string }
+      - { name: date_video, label: "Date (facultatif, ex. mars 2024)", type: string }
+      - { name: description, label: "Une phrase de présentation", type: text }
+      - { name: integrer, label: "Lire la vidéo directement sur le site (seulement pour VOS vidéos, jamais pour France TV)", type: boolean, default: false }
+
+  - name: pages
+    label: "Pages des activités"
+    type: group
+    items:
+      - name: pages-la-petite-chevalerie
+        label: "La Petite Chevalerie"
+        type: collection
+        path: src/activites/la-petite-chevalerie
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-sortez-vos-griffes
+        label: "Sortez vos griffes"
+        type: collection
+        path: src/activites/sortez-vos-griffes
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-matria
+        label: "Matria par Karim"
+        type: collection
+        path: src/activites/matria
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-respirer-se-tenir-se-poser
+        label: "Respirer, se tenir, se poser"
+        type: collection
+        path: src/activites/respirer-se-tenir-se-poser
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-perinee-flow
+        label: "Périnée Flow"
+        type: collection
+        path: src/activites/perinee-flow
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-prevention-chutes-ehpad
+        label: "Prévention des chutes en EHPAD"
+        type: collection
+        path: src/activites/prevention-chutes-ehpad
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-contes-sportifs
+        label: "Les contes sportifs"
+        type: collection
+        path: src/activites/contes-sportifs
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-fitness
+        label: "Fitness"
+        type: collection
+        path: src/activites/fitness
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+      - name: pages-developpement-personnel
+        label: "Développement personnel"
+        type: collection
+        path: src/activites/developpement-personnel
+        filename: "{primary}.md"
+        subfolders: false
+        view: { primary: title, sort: [ordre] }
+        fields:
+          - { name: title, label: "Titre de la page", type: string, required: true }
+          - { name: titre_menu, label: "Nom court dans le menu (facultatif)", type: string }
+          - { name: surtitre, label: "Petit texte au-dessus du titre (facultatif)", type: string }
+          - { name: chapo, label: "Phrase d'introduction", type: text }
+          - { name: ordre, label: "Position dans le menu (1 = en premier)", type: number, default: 50 }
+          - { name: brouillon, label: "Brouillon (visible seulement dans l'aperçu)", type: boolean, default: false }
+          - { name: body, label: "Contenu de la page", type: rich-text }
+
+  - name: autres
+    label: "Autres pages (contact, premium…)"
+    type: collection
+    path: src/pages
+    filename: "{primary}.md"
+    fields:
+      - { name: title, label: "Titre de la page", type: string, required: true }
+      - { name: layout, label: "Mise en page (ne pas changer)", type: string, default: page.njk, hidden: true }
+      - { name: permalink, label: "Adresse de la page (ex. /ma-page/)", type: string, required: true }
+      - { name: chapo, label: "Phrase d'introduction", type: text }
+      - { name: body, label: "Contenu de la page", type: rich-text }
+
+  - name: reglages
+    label: "Coordonnées et réseaux"
+    type: file
+    path: src/_data/site.json
+    format: json
+    fields:
+      - { name: nom, label: "Nom", type: string }
+      - { name: metier, label: "Métier (sous le nom)", type: string }
+      - { name: presentation, label: "Présentation en une phrase", type: text }
+      - { name: url, label: "Adresse du site (quand vous aurez un nom de domaine)", type: string }
+      - { name: contact_email, label: "E-mail de contact", type: string }
+      - { name: contact_telephone, label: "Téléphone", type: string }
+      - { name: facebook, label: "Lien de la page Facebook", type: string }
+      - { name: youtube, label: "Lien de la chaîne YouTube", type: string }
+      - { name: instagram, label: "Lien Instagram", type: string }

@@ -1,0 +1,62 @@
+---
+title: "Accueil"
+layout: base.njk
+---
+<section class="hero">
+  <div class="hero-int">
+    <div>
+      <img class="hero-k" src="/assets/img/logo-k-blanc.png" alt="" width="96" height="69">
+      <h1>{{ site.nom }}</h1>
+      <p class="slogan">Se faire du bien sans se faire de mal</p>
+      <p class="metier">{{ site.metier }}</p>
+      <p class="presentation">{{ site.presentation }} Vu aussi dans Télématin, et « coach bonheur » de la série « J'ai décidé d'être heureux » sur M6 en 2013. Des programmes pour les enfants, les femmes, les futures et jeunes mamans, les entreprises et les aînés, tous construits sur des études scientifiques citées.</p>
+      <a class="bouton" href="#activites">Découvrir les activités</a>
+      <a class="bouton bouton-secondaire" href="/videos/">Voir les vidéos</a>
+    </div>
+    <img class="hero-photo" src="/assets/img/photos/karim-kettlebell-coucher-soleil.jpg" alt="Karim Ngosso tenant une kettlebell au coucher du soleil" width="1050" height="1400">
+  </div>
+  <div class="hero-filet" aria-hidden="true"></div>
+</section>
+
+<section class="section" id="activites" aria-labelledby="titre-activites">
+  <h2 id="titre-activites">Les activités</h2>
+  <p class="section-intro">Chaque programme a son public, son identité et sa page. Tous partagent la même règle : bouger sans se faire de mal, et dire ce que montrent vraiment les études.</p>
+  <ul class="activites">
+  {%- for a in activites %}
+    <li class="carte-activite {% if a.statut == 'a-venir' %}a-venir-carte{% endif %}" style="--accent: {{ a.accent }}; --encre: {{ a.encre }}; --police-titre: '{{ a.police }}';">
+      {%- if a.photo %}<img class="carte-photo" src="{{ a.photo }}" alt="" loading="lazy">{% else %}<div class="liseré"></div>{% endif %}
+      <div class="corps">
+        {%- if a.icone %}<img class="carte-icone" src="{{ a.icone }}" alt="" width="64" height="64">{% endif %}
+        <h3><a href="/activites/{{ a.slug }}/">{{ a.nom }}</a></h3>
+        {%- if a.statut == "a-venir" %}
+        <p><span class="a-venir">À venir</span></p>
+        {%- else %}
+        <p class="devise">{{ a.devise }}</p>
+        {%- endif %}
+        <p class="public">{{ a.public }}</p>
+        <p class="resume">{{ a.resume }}</p>
+      </div>
+    </li>
+  {%- endfor %}
+  </ul>
+</section>
+
+<div class="bande-medias">
+<section class="section section-medias" aria-labelledby="titre-medias">
+  <img class="medias-photo" src="/assets/img/photos/karim-evenement.jpg" alt="Karim Ngosso, micro-casque, lors d'un événement sportif" loading="lazy">
+  <div>
+  <h2 id="titre-medias">À la télévision</h2>
+  <p class="section-intro">Karim est le coach sportif de <em>La Maison des Maternelles</em> (France Télévisions). On l'a vu aussi dans Télématin et, en 2013, dans « J'ai décidé d'être heureux » sur M6. Retrouvez ses passages et ses conseils en vidéo.</p>
+  <a class="bouton" href="/videos/">Toutes les vidéos</a>
+  </div>
+</section>
+</div>
+
+<section class="section" aria-labelledby="titre-approche">
+  <h2 id="titre-approche">Une même façon de travailler</h2>
+  <ul class="grille-cartes">
+    <li class="carte-simple"><h3>Sourcé</h3><p>Chaque chiffre vient d'une étude ou d'une recommandation officielle citée. Ce qui n'est pas démontré est présenté comme tel.</p></li>
+    <li class="carte-simple"><h3>Sans danger</h3><p>On ne force jamais. Les exercices sont choisis pour protéger le dos, le périnée et les articulations.</p></li>
+    <li class="carte-simple"><h3>En complément</h3><p>Le coach accompagne, il ne soigne pas : les programmes complètent le suivi médical, l'école et les parents, sans les remplacer.</p></li>
+  </ul>
+</section>

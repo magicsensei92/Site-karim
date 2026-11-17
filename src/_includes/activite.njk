@@ -1,0 +1,20 @@
+---
+layout: base.njk
+---
+{%- set act = activites | activite(activite) -%}
+<article class="page-activite">
+  <header class="tete-page{% if photo %} avec-photo{% endif %}">
+    <div class="tete-int">
+      <div class="tete-texte">
+      {%- if logo %}<img class="logo-activite" src="{{ logo }}" alt="{{ act.nom }}" width="320">{% endif %}
+      {%- if surtitre %}<p class="surtitre">{{ surtitre }}</p>{% endif %}
+      <h1>{{ title }}</h1>
+      {%- if chapo %}<p class="chapo">{{ chapo }}</p>{% endif %}
+      </div>
+      {%- if photo %}<img class="tete-photo" src="{{ photo }}" alt="{{ photo_alt or '' }}" loading="eager">{% endif %}
+    </div>
+  </header>
+  <div class="texte">
+    {{ content | safe }}
+  </div>
+</article>

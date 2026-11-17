@@ -1,0 +1,20 @@
+# Réglages Netlify (hébergement gratuit). Ne pas modifier.
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Les aperçus (deploy previews) montrent aussi les pages brouillon.
+[context.deploy-preview.environment]
+  AFFICHER_BROUILLONS = "oui"
+[context.branch-deploy.environment]
+  AFFICHER_BROUILLONS = "oui"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "interest-cohort=()"
